@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sing3demons/thailand-provinces/models"
+	"github.com/sing3demons/thailand-provinces/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -29,11 +29,7 @@ func InitDB() {
 		panic("failed to connect database")
 	}
 
-	database.AutoMigrate(models.Amphue{})
-	database.AutoMigrate(models.District{})
-	database.AutoMigrate(models.Geographie{})
-	database.AutoMigrate(models.Province{})
-	database.AutoMigrate(models.ZipCode{})
+	database.AutoMigrate(entity.ZipCode{})
 
 	db = database
 }

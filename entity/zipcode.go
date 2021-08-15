@@ -1,4 +1,4 @@
-package models
+package entity
 
 type ZipCode struct {
 	ID           uint   `gorm:"primarykey"`
