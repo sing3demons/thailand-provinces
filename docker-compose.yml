@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    # container_name: go-postgres
+    ports:
+    - 5432:5432
+      # - ${DB_PORT}:${DB_PORT}
+    environment:
+      - POSTGRES_DB=provinces_api
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=superpass
+      # - POSTGRES_DB=${DB_NAME}
+      # - POSTGRES_USER=${DB_USER}
+      # - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./_pg_data:/var/lib/postgresql/data
+    restart: always
+
+  webapi:
+    # container_name: web-api
+    build: .
+    ports:
+      - 8080:8080
+      # - "${PORT}:${PORT}"
+    volumes:
+      - ".:/app"
+    restart: always
+    depends_on:
+      - db
+    links:
+      - "db:database"
